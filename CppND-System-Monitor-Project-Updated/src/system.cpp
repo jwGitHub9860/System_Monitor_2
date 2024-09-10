@@ -3,7 +3,10 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <functional>
 
+#include "linux_parser.h"
 #include "process.h"
 #include "processor.h"
 #include "system.h"
@@ -12,12 +15,28 @@ using std::set;
 using std::size_t;
 using std::string;
 using std::vector;
+using std::less;
+
+//using namespace std;
 
 // TODO: Return the system's CPU
-Processor& System::Cpu() { return cpu_; }
+Processor& System::Cpu() { return this->cpu_; }
 
 // TODO: Return a container composed of the system's processes
-vector<Process>& System::Processes() { return processes_; }
+vector<Process>& System::Processes()
+{
+    processes_.clear();
+    vector<int> process_Pids = LinuxParser::Pids();     // holds ALL process ID's
+    for (auto i : process_Pids)    // iterates through ALL process ID's
+    {
+        Process process_(i);     // constructor
+        process_.CpuUtilization();
+        process_.UpTime();
+        processes_.emplace_back(process_);
+    }
+    sort(processes_.begin(), processes_.end());      // less<> - boolean using "<" for POINTERS      type of "less<>()" MUST BE 'Process' because vector<type> is 'Process'
+    return processes_;
+}
 
 // TODO: Return the system's kernel identifier (string)
 std::string System::Kernel() { return string(); }
