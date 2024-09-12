@@ -23,7 +23,7 @@ class Process {
   
   int process_ID;
 
-  float prev_total_jiffies = 0;  // MUST BE INITIALIZED
+  float prev_active_jiffies = 0;  // MUST BE INITIALIZED
   float prev_idle_jiffies = 0;  // MUST BE INITIALIZED
   float prev_User = 0;  // MUST BE INITIALIZED
   float prev_Nice = 0;  // MUST BE INITIALIZED
