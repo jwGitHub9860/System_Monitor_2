@@ -163,15 +163,14 @@ long LinuxParser::IdleJiffies()
 vector<string> LinuxParser::CpuUtilization()  // finds lines that hold cpu info & inputs values into vector
 {
   vector<string> jiffies;   // holds jiffies (Large Values)
-  string line, cpu_key, value;
+  string line, value;
   ifstream stream(kProcDirectory + kStatFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + stat file name"
   if (stream.is_open())
   {
     getline(stream, line);   // gets line from stream & stores it in "string line"
     istringstream linestream(line);    // creates string stream from "line"
-    linestream >> cpu_key;  // allows to pull tokens off stream     first token - cpu_key     checks if "cpu_key" holds cpu info (key = cpu / cpu...#)
 
-    while (linestream >> value)  // allows to pull tokens off stream     first token - value     pulls off numbers in cpu line, NOT cpu string; while loop used due to multiple lines
+    while (linestream >> value)  // allows to pull tokens off stream     first token - value     pulls off numbers in cpu line, NOT cpu string; while loop used due to multiple lines     INCLUDING "cpu" ID
     {
       jiffies.emplace_back(value);
     }
