@@ -178,7 +178,7 @@ vector<string> LinuxParser::CpuUtilization()  // finds lines that hold cpu info 
       }
     }
   }
-  return {};
+  return jiffies;  // if opening string or something else fails, return "jiffies" vector as Blank Vector String Default     MUST CHANGE "uptime" from 'string' to 'long' LAST or error will be returned
 }
 
 // TODO: Read and return the total number of processes
