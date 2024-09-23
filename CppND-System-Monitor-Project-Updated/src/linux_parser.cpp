@@ -253,13 +253,15 @@ string LinuxParser::Ram(int pid)
   ifstream stream(kProcDirectory + to_string(pid) + kStatusFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + pid + status file name"
   if (stream.is_open())
   {
-    getline(stream, line);   // gets line from stream & stores it in "string line"
-    istringstream linestream(line);  // input string stream
-    while (linestream >> key >> value)  // allows to pull tokens off stream     1st token - key     2nd token - value
+    while (getline(stream, line))  // gets line from stream & stores it in "string line"; while loop used due to multiple lines
     {
-      if (key == "VmRSS")   // checks if "key" contains 'VmRSS' (process RAM memory usage)      'VmSize' - total process VIRTUAL memory
+      istringstream linestream(line);  // input string stream
+      while (linestream >> key >> value)  // allows to pull tokens off stream     1st token - key     2nd token - value
       {
-        return value;
+        if (key == "VmRSS")   // checks if "key" contains 'VmRSS' (process RAM memory usage)      'VmSize' - total process VIRTUAL memory
+        {
+          return value;
+        }
       }
     }
   }
