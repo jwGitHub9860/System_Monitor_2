@@ -39,7 +39,7 @@ float Process::CpuUtilization()
     prev_Idle = LinuxParser::kIdle_;    // make Current idle, Previous idle
     prev_Iowait = LinuxParser::kIOwait_;    // make Current iowait, Previous iowait
     
-    return (total_jiffies - idle_jiffies) / total_jiffies;   // CALCULATE PERCENT WITH * 100 OR NOT?                 CPU utilization = Total time - Idle time      CPU utilization will be shown as PERCENTAGE
+    return (total_jiffies - idle_jiffies);   // CALCULATE PERCENT WITH * 100 OR NOT?      CPU utilization = Total time - Idle time      CPU utilization will be shown as PERCENTAGE      using " / total_jiffies" after "(total_jiffies - idle_jiffies)", result will be "-nan"
 }
 
 // TODO: Return the command that generated this process
