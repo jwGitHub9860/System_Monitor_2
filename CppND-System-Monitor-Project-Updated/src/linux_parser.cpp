@@ -261,7 +261,7 @@ string LinuxParser::Ram(int pid)
       return value;
     }
   }
-  return value;
+  return value;  // if opening string or something else fails, return "value" as Blank String Default
 }
 
 // TODO: Read and return the user ID associated with a process
