@@ -268,20 +268,15 @@ string LinuxParser::Ram(int pid)
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Uid(int pid)
 {
-  string line, key, value;
-  ifstream stream(kProcDirectory + to_string(pid) + kStatusFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + pid + status file name"
+  string line, username, password, user_ID;
+  ifstream stream(kPasswordPath);  // input file stream from path for operating system kernel version          operating system kernel version - "password path directory"
   if (stream.is_open())
   {
     getline(stream, line);   // gets line from stream & stores it in "string line"
     istringstream linestream(line);  // input string stream
-    linestream >> key >> value;  // allows to pull tokens off stream     1st token - key     2nd token - value
-    if (key == "Uid:")   // checks if "key" contains 'Uid' (user ID)
-    {
-      stream.close();
-      return value;
-    }
+    linestream >> username >> password >> user_ID;  // allows to pull tokens off stream     1st token - username     2nd token - password     3rd token - user_ID
   }
-  return string();
+  return user_ID;  // if opening string or something else fails, return "user_ID" as Blank String Default
 }
 
 // TODO: Read and return the user associated with a process
