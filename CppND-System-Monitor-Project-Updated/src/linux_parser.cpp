@@ -255,10 +255,12 @@ string LinuxParser::Ram(int pid)
   {
     getline(stream, line);   // gets line from stream & stores it in "string line"
     istringstream linestream(line);  // input string stream
-    linestream >> key >> value;  // allows to pull tokens off stream     1st token - key     2nd token - value
-    if (key == "VmRSS")   // checks if "key" contains 'VmRSS' (process RAM memory usage)      'VmSize' - total process VIRTUAL memory
+    while (linestream >> key >> value)  // allows to pull tokens off stream     1st token - key     2nd token - value
     {
-      return value;
+      if (key == "VmRSS")   // checks if "key" contains 'VmRSS' (process RAM memory usage)      'VmSize' - total process VIRTUAL memory
+      {
+        return value;
+      }
     }
   }
   return value;  // if opening string or something else fails, return "value" as Blank String Default
