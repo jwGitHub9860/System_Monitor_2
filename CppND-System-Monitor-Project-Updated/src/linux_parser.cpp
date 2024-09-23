@@ -283,7 +283,7 @@ string LinuxParser::Uid(int pid)
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::User(int pid)
 {
-  string line, username, password, user_ID;
+  string line, username, password, user_ID, group_ID, gecos, home_directory, login_system;    // Must include ALL or user_ID will include user_ID, group_ID, gecos, home_directory, login_system
   string Uid = LinuxParser::Uid(pid);   // function that returns USER
   ifstream stream(kPasswordPath);  // input file stream from path for operating system kernel version          operating system kernel version - "password path directory"
   if (stream.is_open())
@@ -292,7 +292,7 @@ string LinuxParser::User(int pid)
     {
       replace(line.begin(), line.end(), ':', ' ');
       istringstream linestream(line);  // input string stream
-      while (linestream >> username >> password >> user_ID)  // allows to pull tokens off stream     1st token - username     2nd token - password     3rd token - user_ID
+      while (linestream >> username >> password >> user_ID >> group_ID >> gecos >> home_directory >> login_system)  // allows to pull tokens off stream     1st token - username     2nd token - password     3rd token - user_ID     4th token - group_ID     5th token - gecos     6th token - home_directory     7th token - login_system
       {
         if (user_ID == Uid)  // checks if "user_ID" matches "Uid"
         {
