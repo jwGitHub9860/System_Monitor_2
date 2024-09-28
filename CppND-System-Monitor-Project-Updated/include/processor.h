@@ -25,7 +25,6 @@ class Processor {
    float Prev_Steal = 0;  // MUST BE INITIALIZED
    
    float Prev_Total = 0;  // MUST BE INITIALIZED
-   
 };
 
 #endif
