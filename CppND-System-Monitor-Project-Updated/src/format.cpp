@@ -2,12 +2,17 @@
 #include <vector>
 #include <cmath>
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 #include "format.h"
 
 using std::string;
 using std::vector;
 using std::to_string;
+using std::ostringstream;
+using std::setw;
+using std::setfill;
 
 //using namespace std;
 
@@ -17,9 +22,13 @@ using std::to_string;
 // REMOVE: [[maybe_unused]] once you define the function
 string Format::ElapsedTime(long seconds)    // calculates Uptime into { Hr:Min:Sec }
 {
-    long hr = seconds / 3600;
-    seconds = seconds % 3600;
-    long min = seconds / 60;
-    long sec = seconds % 60;
-    return to_string(hr) + ":" + to_string(min) + ":" + to_string(sec);
+    int hours = seconds / 3600;
+    seconds %= 3600;
+    int minutes = seconds / 60;
+    seconds %= 60;
+    ostringstream stream;
+    stream << setw(2) << setfill('0') << hours << ":"
+            << setw(2) << setfill('0') << minutes << ":"
+            << setw(2) << setfill('0') << seconds;
+    return stream.str();
 }
