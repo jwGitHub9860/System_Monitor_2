@@ -16,7 +16,7 @@ using std::vector;
 Process::Process(int pid) : pid_(pid) {}     // constructor (initializer list) ---> DEFINES SPECIFIC "int pid" OF SPECIFIC PROCESS
 
 // TODO: Return this process's ID
-int Process::Pid() { return process_ID; }
+int Process::Pid() { return pid_; }
 
 // TODO: Return this process's CPU utilization
 float Process::CpuUtilization()
