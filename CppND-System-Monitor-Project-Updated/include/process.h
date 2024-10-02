@@ -34,6 +34,8 @@ class Process {
   float prev_Softirq = 0;  // MUST BE INITIALIZED
 
   int ram_usage;
+
+  float utilization_;
 };
 
 #endif
