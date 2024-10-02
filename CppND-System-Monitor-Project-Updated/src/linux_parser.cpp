@@ -130,7 +130,7 @@ long LinuxParser::ActiveJiffies(int pid)
   vector<string> jiffies;
   string value, line;
   ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + pid + stat file name"
-
+  long time_str;
   if (stream.is_open())
   {
     getline(stream, line);   // gets line from stream & stores it in "string line"
@@ -140,9 +140,10 @@ long LinuxParser::ActiveJiffies(int pid)
       linestream >> value;  // allows to pull tokens off stream     first token - value
       jiffies.emplace_back(value);
     }
-    return stol(jiffies[16]) + stol(jiffies[15]) + stol(jiffies[14]) + stol(jiffies[13]);  // for '/proc/[PID]/stat', Active Jiffies = cstime + cutime + stime + utime    Active Jiffies = index[16] + index[15] + index[14] + index[13]
+    time_str = stol(jiffies[16]) + stol(jiffies[15]) + stol(jiffies[14]) + stol(jiffies[13]);  // for '/proc/[PID]/stat', Active Jiffies = cstime + cutime + stime + utime    Active Jiffies = index[16] + index[15] + index[14] + index[13]
+    return time_str / sysconf(_SC_CLK_TCK);   // divide by sysconf(_SC_CLK_TCK) (the number of clock ticks per second) to get processor time
   }
-  return 0;
+  return time_str / sysconf(_SC_CLK_TCK);  // if opening string or something else fails, return "time_str" as 0 for Blank long Default
 }
 
 // TODO: Read and return the number of active jiffies for the system
