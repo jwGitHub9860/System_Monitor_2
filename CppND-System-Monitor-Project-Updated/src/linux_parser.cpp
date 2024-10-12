@@ -97,7 +97,7 @@ float LinuxParser::MemoryUtilization()
 }
 
 // TODO: Read and return the system uptime
-long LinuxParser::UpTime() 
+long LinuxParser::UpTime()  // first number larger than 1 (ex. 1152) is NOT WRONG ---> 1152 hrs = 48 Days
 {
   long uptime;  // 1ST LARGE VALUE    { 1st value -> system uptime 2nd value -> system idle time} <---(in Cmake)
   string line;
