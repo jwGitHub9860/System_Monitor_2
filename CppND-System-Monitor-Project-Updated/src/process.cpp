@@ -21,9 +21,10 @@ int Process::Pid() { return pid_; }
 // TODO: Return this process's CPU utilization
 float Process::CpuUtilization()
 {
-    long seconds = LinuxParser::UpTime(pid_);
-    long total_time = LinuxParser::ActiveJiffies(pid_);
-    utilization_ = float(total_time) / float(seconds);
+    long process_uptime = LinuxParser::UpTime(pid_);
+    long process_jiffies = LinuxParser::ActiveJiffies(pid_);
+    //long total_uptime = LinuxParser::UpTime();
+    utilization_ = float(process_jiffies) / float(process_uptime/* - total_uptime*/);
     return utilization_;
 }
 

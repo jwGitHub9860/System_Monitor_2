@@ -141,7 +141,7 @@ long LinuxParser::ActiveJiffies(int pid)
       jiffies.emplace_back(value);
     }
     time_str = stol(jiffies[16]) + stol(jiffies[15]) + stol(jiffies[14]) + stol(jiffies[13]);  // for '/proc/[PID]/stat', Active Jiffies = cstime + cutime + stime + utime    Active Jiffies = index[16] + index[15] + index[14] + index[13]
-    return time_str;   // divide by sysconf(_SC_CLK_TCK) (the number of clock ticks per second) to get processor time
+    return time_str / sysconf(_SC_CLK_TCK);   // divide by sysconf(_SC_CLK_TCK) (the number of clock ticks per second) to get processor time      sysconf(_SC_CLK_TCK) - returns number of clock ticks per second, amount of time measured in USER_HZ
   }
   return time_str;  // if opening string or something else fails, return "time_str" as 0 for Blank long Default
 }
