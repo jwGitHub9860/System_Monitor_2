@@ -130,7 +130,7 @@ long LinuxParser::ActiveJiffies(int pid)
   vector<string> jiffies;
   string value, line;
   ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + pid + stat file name"
-  long time_str;
+  long time_str = 0;
   if (stream.is_open())
   {
     getline(stream, line);   // gets line from stream & stores it in "string line"
@@ -321,7 +321,7 @@ string LinuxParser::User(int pid)
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::UpTime(int pid)
 {
-  long uptime;
+  long uptime = 0;
   string line, value;
   ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + pid + STAT file name"          use Same stream as "TotalProcesses()" & "RunningProcesses()" since both deal with processes
   if (stream.is_open())
