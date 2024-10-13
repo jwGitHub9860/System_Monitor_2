@@ -17,8 +17,6 @@ using std::string;
 using std::vector;
 using std::less;
 
-//using namespace std;
-
 // TODO: Return the system's CPU
 Processor& System::Cpu() { return this->cpu_; }
 

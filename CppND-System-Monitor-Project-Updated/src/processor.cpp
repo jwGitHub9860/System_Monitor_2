@@ -5,8 +5,6 @@
 #include "linux_parser.h"
 #include "process.h"
 
-using namespace std;
-
 // TODO: Return the aggregate CPU utilization
 float Processor::Utilization()
 {

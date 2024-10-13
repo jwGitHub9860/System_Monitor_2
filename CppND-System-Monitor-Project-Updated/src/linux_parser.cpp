@@ -12,8 +12,6 @@ using std::vector;
 using std::ifstream;
 using std::istringstream;
 
-//using namespace std;
-
 // DONE: An example of how to read data from the filesystem
 string LinuxParser::OperatingSystem() {
   string line;

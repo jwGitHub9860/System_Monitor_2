@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 class Processor {
  public:
   float Utilization();  // TODO: See src/processor.cpp

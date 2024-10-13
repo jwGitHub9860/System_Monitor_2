@@ -14,8 +14,6 @@ using std::ostringstream;
 using std::setw;
 using std::setfill;
 
-//using namespace std;
-
 // TODO: Complete this helper function
 // INPUT: Long int measuring seconds
 // OUTPUT: HH:MM:SS
