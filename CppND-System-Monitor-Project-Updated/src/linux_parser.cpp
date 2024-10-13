@@ -274,7 +274,7 @@ string LinuxParser::Ram(int pid)
 string LinuxParser::Uid(int pid)
 {
   string line, key, value;
-  ifstream stream(kPasswordPath);  // input file stream from path for operating system kernel version          operating system kernel version - "password path directory"
+  ifstream stream(kProcDirectory + to_string(pid) + kStatusFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + pid + status file name"
   if (stream.is_open())
   {
     while (getline(stream, line))   // gets line from stream & stores it in "string line"
