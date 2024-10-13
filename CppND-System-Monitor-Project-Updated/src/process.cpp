@@ -23,8 +23,8 @@ float Process::CpuUtilization()
 {
     long process_uptime = LinuxParser::UpTime(pid_);
     long process_jiffies = LinuxParser::ActiveJiffies(pid_);
-    //long total_uptime = LinuxParser::UpTime();
-    utilization_ = float(process_jiffies) / float(process_uptime/* - total_uptime*/);
+    long total_uptime = LinuxParser::UpTime();
+    utilization_ = static_cast<float>(process_jiffies) / static_cast<float>(total_uptime - process_uptime);     // "static_cast<float>()" is SAFER than "float()"
     return utilization_;
 }
 

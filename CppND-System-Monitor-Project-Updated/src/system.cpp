@@ -27,14 +27,11 @@ vector<Process>& System::Processes()
 {
     processes_.clear();
     vector<int> process_Pids = LinuxParser::Pids();     // holds ALL process ID's
-    for (auto i : process_Pids)    // iterates through ALL process ID's
+    for (int pid : process_Pids)    // iterates through ALL process ID's
     {
-        Process process_(i);     // constructor
-        process_.CpuUtilization();
-        process_.UpTime();
-        processes_.emplace_back(process_);
+        processes_.emplace_back(Process(pid));     // constructor from "class Process"
     }
-    sort(processes_.begin(), processes_.end());      // less<> - boolean using "<" for POINTERS      type of "less<>()" MUST BE 'Process' because vector<type> is 'Process'
+    sort(processes_.rbegin(), processes_.rend());
     return processes_;
 }
 
