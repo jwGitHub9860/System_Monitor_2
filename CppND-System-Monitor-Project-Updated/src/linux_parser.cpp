@@ -314,7 +314,7 @@ string LinuxParser::User(int pid)
 long LinuxParser::UpTime(int pid)
 {
   long uptime;
-  string line;
+  string line, value;
   ifstream stream(kProcDirectory + to_string(pid) + kStatFilename);  // input file stream from path for operating system kernel version          operating system kernel version - "proc directory + pid + STAT file name"          use Same stream as "TotalProcesses()" & "RunningProcesses()" since both deal with processes
   if (stream.is_open())
   {
@@ -322,9 +322,9 @@ long LinuxParser::UpTime(int pid)
     istringstream linestream(line);  // input string stream
     for (int i = 0; i < 22; i++)  // iterates through all lines until 'line 21' holds "processes" line - number of PROCESSES & threads created
     {
-      linestream >> uptime;  // allows to pull tokens off stream     1st token - uptime     2nd token - idle_time    78322.97 1119670.94 <---(in Cmake Example)
+      linestream >> value;  // allows to pull tokens off stream     takes tokens as STRINGS ----> None of the values are Big Numbers
     }
-    return uptime / sysconf(_SC_CLK_TCK);   // sysconf(_SC_CLK_TCK) - returns number of clock ticks per second, amount of time measured in USER_HZ
+    return uptime = stol(value) / sysconf(_SC_CLK_TCK);   // sysconf(_SC_CLK_TCK) - returns number of clock ticks per second, amount of time measured in USER_HZ
   }
   return uptime;  // if opening long int or something else fails, return "uptime" as Blank Long Int Default
 }
