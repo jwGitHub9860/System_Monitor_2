@@ -143,7 +143,7 @@ long LinuxParser::ActiveJiffies(int pid)
     time_str = stol(jiffies[16]) + stol(jiffies[15]) + stol(jiffies[14]) + stol(jiffies[13]);  // for '/proc/[PID]/stat', Active Jiffies = cstime + cutime + stime + utime    Active Jiffies = index[16] + index[15] + index[14] + index[13]
     return time_str;   // divide by sysconf(_SC_CLK_TCK) (the number of clock ticks per second) to get processor time
   }
-  return time_str / sysconf(_SC_CLK_TCK);  // if opening string or something else fails, return "time_str" as 0 for Blank long Default
+  return time_str;  // if opening string or something else fails, return "time_str" as 0 for Blank long Default
 }
 
 // TODO: Read and return the number of active jiffies for the system
